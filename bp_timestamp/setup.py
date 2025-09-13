@@ -14,6 +14,7 @@ setup(
         ('share/ament_index/resource_index/packages',
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
+        # The below part is the setup for launch file
         (os.path.join('share', package_name, 'launch'), glob('launch/*'))
     ],
     install_requires=['setuptools'],

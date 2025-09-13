@@ -1,0 +1,14 @@
+%YAML 1.2
+---
+launch:
+  - node:
+      pkg: "can_aggregator"
+      exec: "stamper"
+      name: "can_stamper"
+      namespace: "aggregator1"
+
+  # - node:
+  #     pkg: "can_aggregator"
+  #     exec: "debugger"
+  #     name: "can_debugger"
+  #     namespace: "aggregator2"
