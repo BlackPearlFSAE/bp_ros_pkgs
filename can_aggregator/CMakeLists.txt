@@ -11,19 +11,23 @@ find_package(rclcpp REQUIRED)
 find_package(can_msgs REQUIRED)
 
 # --- Add script entry point
-add_executable(stamper src/can_stamper.cpp)
-# add_executable(debugger src/can_debugger.cpp)
-ament_target_dependencies(stamper rclcpp can_msgs)
-# ament_target_dependencies(debugger rclcpp can_msgs)
+add_executable(aggregator src/can_stamper.cpp)
+ament_target_dependencies(aggregator rclcpp can_msgs)
 
+add_executable(commander src/can_sender.cpp)
+ament_target_dependencies(commander rclcpp can_msgs)
+
+# -- install executable to libs
 install(TARGETS
-  stamper
+  aggregator
+  commander
   DESTINATION lib/${PROJECT_NAME})
 
-# install(DIRECTORY
-#   launch
-#   DESTINATION share/${PROJECT_NAME}/
-# )
+# --install launch file at /share
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}/
+)
 
 # --- BUILD_TESTING
 if(BUILD_TESTING)
