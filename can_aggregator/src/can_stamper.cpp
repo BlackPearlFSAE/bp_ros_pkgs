@@ -96,20 +96,28 @@ public:
 
   void sub_sbRx(const Frame::SharedPtr msg){
     // RCLCPP_INFO(this->get_logger(),"I know you got ");
-    int64_t now = this->get_clock()->now().nanoseconds();
+    auto now = this->get_clock()->now();
     // welp still not sure how this would work
     MessageID ID = static_cast<MessageID>(msg->id);
     
     switch (ID) {
       // assign our own CAN frame to each recivied ID 
       case AMS: 
-        last_ams_msg = *msg; last_ams_msg.header.stamp.nanosec = now;     break;
+        last_ams_msg = *msg; 
+        last_ams_msg.header.stamp.nanosec = now.nanoseconds();
+        last_ams_msg.header.stamp.sec = now.seconds();     break;
       case BAMO: 
-        last_bamo_msg = *msg; last_bamo_msg.header.stamp.nanosec = now;   break;
+        last_bamo_msg = *msg; 
+        last_bamo_msg.header.stamp.nanosec = now.nanoseconds();
+        last_bamo_msg.header.stamp.sec = now.seconds();     break;
       case FRONT: 
-        last_front_msg = *msg; last_front_msg.header.stamp.nanosec = now; break;
+        last_front_msg = *msg; 
+        last_front_msg.header.stamp.nanosec = now.nanoseconds();
+        last_front_msg.header.stamp.sec = now.seconds();     break;
       case REAR: 
-        last_rear_msg = *msg; last_rear_msg.header.stamp.nanosec = now;   break;
+        last_rear_msg = *msg; 
+        last_rear_msg.header.stamp.nanosec = now.nanoseconds();
+        last_rear_msg.header.stamp.sec = now.seconds();     break;
       
       // if switch case doesn't comply with enum -> it must be BMU internal bus
       default:

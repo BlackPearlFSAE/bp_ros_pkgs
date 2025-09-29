@@ -18,7 +18,7 @@ def generate_launch_description():
         ),
         Node(
             package='ros2socketcan',
-            namespace='ros2socketcan1',
+            namespace='',
             executable='ros2socketcan',
             name='ros2can'
         )
